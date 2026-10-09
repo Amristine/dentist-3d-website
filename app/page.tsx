@@ -251,7 +251,7 @@ export default function Home() {
           <h2>Meet the person<br />behind <em>your care.</em></h2>
           <p>Good dentistry starts with listening. We take time to understand what matters to you, talk through your options, and make a plan together—at a pace that feels right.</p>
           <div className="dentist-credentials"><span>YOUR DENTIST</span><span>NAME & CREDENTIALS TO BE ADDED</span></div>
-          <a className="text-cta" href="#appointment">Let's have a conversation <ArrowRight size={17} /></a>
+          <a className="text-cta" href="#appointment">Let’s have a conversation <ArrowRight size={17} /></a>
         </div>
         <span className="dentist-side-caption">TRUST IS BUILT ONE CONVERSATION AT A TIME.</span>
       </section>
@@ -261,7 +261,7 @@ export default function Home() {
         <div className="appointment-art" aria-hidden="true"><div className="appointment-art-ring" /><div className="appointment-art-orb" /><div className="appointment-art-glint" /></div>
         <div className="appointment-content" data-reveal>
           <span className="section-index">06 / YOUR NEXT CHAPTER</span>
-          <p className="appointment-kicker">THERE'S A FIRST STEP FOR EVERYTHING.</p>
+          <p className="appointment-kicker">THERE’S A FIRST STEP FOR EVERYTHING.</p>
           <h2>Your next chapter<br /><em>starts with a smile.</em></h2>
           <p className="appointment-copy-text">No pressure. No judgement. Just a conversation about what feels right for you.</p>
           <a href="mailto:hello@lumieredental.example?subject=I'd%20like%20to%20book%20a%20consultation" className="button button-gold">Book a consultation <ArrowUpRight size={17} /></a>
@@ -271,7 +271,7 @@ export default function Home() {
           <div><span>01 / SAY HELLO</span><a href="mailto:hello@lumieredental.example">hello@lumieredental.example <ArrowUpRight size={13} /></a></div>
           <div><span>02 / VISIT US</span><p>Your neighbourhood.<br />Your new dental home.</p></div>
           <div><span>03 / WHEN</span><p>Monday — Saturday<br />By appointment</p></div>
-          <p className="contact-placeholder">Replace the contact details with the clinic's verified information before launch.</p>
+          <p className="contact-placeholder">Replace the contact details with the clinic’s verified information before launch.</p>
         </div>
       </section>
 
