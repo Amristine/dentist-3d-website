@@ -1152,3 +1152,51 @@ body {
   .dentora-booking-body { grid-template-columns: minmax(0,.88fr) minmax(0,1.12fr); gap: 7px; }
   .dentora-time-grid button { font-size: 7px; }
 }
+
+
+/* Inbox view and the messages badge */
+.messages-nav-dot { display: block; flex: 0 0 8px; width: 8px; height: 8px; margin-left: auto; border-radius: 50%; background: #fa4c5d; box-shadow: 0 0 0 3px rgba(250,76,93,.08); }
+.dentora-messages-view { display: grid; grid-template-columns: minmax(250px,.8fr) minmax(0,1.55fr); gap: 14px; align-items: stretch; min-width: 0; }
+.dentora-inbox-panel, .dentora-thread-panel { min-width: 0; overflow: hidden; border: 1px solid #e4ece8; border-radius: 19px; background: rgba(255,255,253,.94); box-shadow: var(--shadow); }
+.dentora-inbox-panel { padding: 17px 13px 12px; }
+.dentora-inbox-heading { padding: 0 5px 13px; }
+.dentora-inbox-heading h2 { display: flex; align-items: center; gap: 9px; margin: 7px 0 0; color: #102d3b; font-size: 21px; letter-spacing: -.7px; }
+.dentora-inbox-heading h2 span { padding: 4px 7px; border-radius: 12px; color: #078f92; background: #dcf7f0; font-size: 9px; letter-spacing: 0; }
+.dentora-inbox-search { display: flex; align-items: center; gap: 8px; height: 38px; padding: 0 11px; border-radius: 13px; background: #f2f6f4; color: #718793; }
+.dentora-inbox-search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #183748; font-size: 10px; }
+.dentora-conversation { display: flex; align-items: center; gap: 10px; width: 100%; min-width: 0; margin-top: 8px; padding: 10px 8px; border: 1px solid transparent; border-radius: 14px; background: transparent; color: #142f3d; text-align: left; }
+.dentora-conversation.selected { background: #eaf9f5; border-color: #d8f1e9; }
+.dentora-conversation > img, .dentora-team-avatar, .dentora-billing-avatar { display: grid; place-items: center; flex: 0 0 43px; width: 43px; height: 43px; border-radius: 50%; object-fit: cover; }
+.dentora-team-avatar { background: #e6f3ff; color: #2198d5; }
+.dentora-billing-avatar { background: #f0ebff; color: #7560df; border-radius: 13px; }
+.dentora-conversation > span:nth-child(2) { display: flex; flex-direction: column; flex: 1; min-width: 0; gap: 6px; }
+.dentora-conversation strong { display: flex; align-items: center; gap: 6px; color: #123243; font-size: 10px; white-space: nowrap; }
+.dentora-conversation strong i { display: grid; place-items: center; min-width: 17px; height: 17px; border-radius: 50%; background: #04afaa; color: white; font-size: 8px; font-style: normal; }
+.dentora-conversation small { overflow: hidden; color: #627c89; font-size: 9px; white-space: nowrap; text-overflow: ellipsis; }
+.dentora-conversation time { align-self: flex-start; color: #85979d; font-size: 8px; white-space: nowrap; }
+.dentora-thread-panel { display: flex; flex-direction: column; min-height: 510px; }
+.dentora-thread-header { display: flex; align-items: center; gap: 11px; padding: 15px 18px; border-bottom: 1px solid #edf1ef; }
+.dentora-thread-header > img { width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%; object-fit: cover; }
+.dentora-thread-header > span { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 6px; }
+.dentora-thread-header strong { color: #102d3b; font-size: 12px; font-weight: 800; }
+.dentora-thread-header small { display: flex; align-items: center; gap: 6px; color: #6d838d; font-size: 9px; }
+.dentora-thread-header small i { width: 7px; height: 7px; border-radius: 50%; background: #11bf80; }
+.dentora-thread-header > button { display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #f2f6f3; color: #0a9698; }
+.dentora-thread-messages { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: 14px; padding: 23px 21px; background: linear-gradient(180deg,#fff,#fcfefd); }
+.dentora-thread-date { align-self: center; padding: 6px 10px; border-radius: 16px; background: #f1f5f3; color: #748b93; font-size: 9px; }
+.dentora-message { position: relative; max-width: min(78%,420px); padding: 12px 14px 23px; border-radius: 15px 15px 15px 5px; background: #eff7f4; color: #254859; font-size: 11px; line-height: 1.65; }
+.dentora-message.outgoing { align-self: flex-end; border-radius: 15px 15px 5px 15px; background: #08b4ad; color: white; }
+.dentora-message time { position: absolute; bottom: 6px; right: 10px; color: #728b92; font-size: 8px; }
+.dentora-message.outgoing time { color: rgba(255,255,255,.8); }
+.dentora-message-composer { display: flex; gap: 10px; padding: 12px 16px; border-top: 1px solid #edf1ef; }
+.dentora-message-composer input { flex: 1; min-width: 0; height: 41px; padding: 0 15px; border: 1px solid #e5eeea; border-radius: 23px; outline: 0; color: #183847; background: #fafcfb; font-size: 10px; }
+.dentora-message-composer input:focus { border-color: #92d9ce; }
+.dentora-message-composer button { display: grid; place-items: center; width: 42px; height: 42px; border: 0; border-radius: 50%; color: white; background: #08b3ad; }
+.dentora-message-demo-note { padding: 0 15px; margin: 0 0 11px; color: #87979c; font-size: 8px; line-height: 1.5; }
+@media (max-width: 760px) {
+  .dentora-messages-view { grid-template-columns: 1fr; gap: 10px; }
+  .dentora-inbox-panel { padding: 13px 10px; }
+  .dentora-thread-panel { min-height: 410px; }
+  .dentora-thread-messages { padding: 18px 12px; }
+  .dentora-message { max-width: 88%; }
+}
