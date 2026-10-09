@@ -98,7 +98,7 @@ function TreatmentArt({ tone }: { tone: string }) {
     peach: "/images/teeth-whitening.webp",
     lavender: "/images/dental-implant.webp",
     aqua: "/images/clear-aligners.webp",
-    butter: "/images/regular-checkup.webp",
+    butter: "/images/hero-tooth.webp",
   };
   return (
     <div className={`treatment-art treatment-art-${tone}`}>
@@ -322,7 +322,7 @@ export default function DashboardClient() {
             <div className="dentora-care-gallery-heading"><span className="small-eyebrow">SMALL HABITS, HEALTHIER SMILES</span><h3>Everyday care</h3><p>Simple ways to keep your routine consistent between visits.</p></div>
             <div className="dentora-care-gallery-grid">
               <article className="dentora-care-tile care-tile-floss"><div className="dentora-care-tile-image"><Image unoptimized src="/images/dental-floss.webp" alt="Dental floss dispenser" fill sizes="(max-width: 760px) 100vw, 30vw" /></div><div><strong>Floss daily</strong><p>Clean gently between teeth, where a toothbrush may miss.</p></div></article>
-              <article className="dentora-care-tile care-tile-checkup"><div className="dentora-care-tile-image"><Image unoptimized src="/images/regular-checkup.webp" alt="Dental check-up illustration" fill sizes="(max-width: 760px) 100vw, 30vw" /></div><div><strong>Regular check-ups</strong><p>Plan routine visits with your dental professional.</p></div></article>
+              <article className="dentora-care-tile care-tile-checkup"><div className="dentora-care-tile-image"><Image unoptimized src="/images/hero-tooth.webp" alt="Dental check-up illustration" fill sizes="(max-width: 760px) 100vw, 30vw" /></div><div><strong>Regular check-ups</strong><p>Plan routine visits with your dental professional.</p></div></article>
               <article className="dentora-care-tile care-tile-cleaning"><div className="dentora-care-tile-image"><Image unoptimized src="/images/teeth-cleaning.webp" alt="Professional teeth cleaning illustration" fill sizes="(max-width: 760px) 100vw, 30vw" /></div><div><strong>Professional cleaning</strong><p>Ask your clinic how often a cleaning is appropriate for you.</p></div></article>
             </div>
           </section>
