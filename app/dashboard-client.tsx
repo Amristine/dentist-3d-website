@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  Activity, ArrowDownToLine, ArrowRight, ArrowUpRight, Bell, CalendarDays, MessageCircle, Send,
+  Activity, ArrowRight, ArrowUpRight, Bell, CalendarDays, MessageCircle, Send,
   Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3,
   ClipboardList, FileText, HeartPulse, Home as HomeIcon, Menu, Search, Settings,
   ShieldCheck, Sparkles, Stethoscope, UserRound, WalletCards, X, Plus,
@@ -79,8 +79,6 @@ function ToothArt({ variant = "main" }: { variant?: "main" | "small" | "implant"
     />
   );
 }
-
-function ArrowDownRecord() { return <ArrowDownToLine size={15} />; }
 
 function BrandMark() {
   return <div className="brand-mark"><span className="brand-tooth"><svg viewBox="0 0 34 36" aria-hidden="true"><path d="M7 7C2 2 1 10 4 17l5 14c1.5 4 5 3 6-2l2-7 2 7c1.5 5 5 6 7 0l4-12c2-7-1-13-6-12-3 .4-5 2-7 2S11 10 7 7Z" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/></svg></span></div>;
