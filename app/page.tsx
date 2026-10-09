@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useMemo, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -40,62 +42,26 @@ const RECORDS = [
 
 const slots = ["09:00 AM", "10:00 AM", "10:30 AM", "11:00 AM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM"];
 
-function ToothArt({ variant = "main", shield = false }: { variant?: "main" | "small" | "implant" | "clean" | "arch"; shield?: boolean }) {
-  if (variant === "arch") {
-    return (
-      <svg viewBox="0 0 360 240" className="tooth-arch" role="img" aria-label="Illustration of a healthy set of teeth">
-        <defs>
-          <linearGradient id="gum" x1="0" y1="0" x2="0.8" y2="1"><stop stopColor="#f8bfb0"/><stop offset="1" stopColor="#d98282"/></linearGradient>
-          <linearGradient id="enamel" x1="0" y1="0" x2="0.9" y2="1"><stop stopColor="#fffef8"/><stop offset=".55" stopColor="#f5e9d8"/><stop offset="1" stopColor="#d9c6b0"/></linearGradient>
-          <filter id="archShadow" x="-20%" y="-20%" width="150%" height="160%"><feDropShadow dx="0" dy="9" stdDeviation="8" floodColor="#4a998e" floodOpacity=".22"/></filter>
-        </defs>
-        <ellipse cx="180" cy="126" rx="139" ry="86" fill="#80d9cc" opacity=".22"/>
-        <g filter="url(#archShadow)" transform="translate(0 5)">
-          <path d="M62 94 Q84 38 180 38 Q276 38 298 94 Q288 168 180 193 Q72 168 62 94Z" fill="url(#gum)" stroke="#d88982" strokeWidth="2"/>
-          {Array.from({ length: 12 }, (_, i) => {
-            const angle = Math.PI + (Math.PI * i) / 11;
-            const x = 180 + Math.cos(angle) * 94;
-            const y = 106 + Math.sin(angle) * 50;
-            const front = i >= 4 && i <= 7;
-            return <g key={i} transform={`translate(${x} ${y}) rotate(${(i - 5.5) * 7})`}>
-              <path d={front ? "M-13 -17 Q-15 -26 -6 -27 L7 -27 Q15 -24 13 -14 L10 9 Q7 18 0 12 Q-7 18 -10 8Z" : "M-16 -15 Q-18 -27 -7 -28 L7 -28 Q18 -24 16 -13 L12 7 Q9 21 2 13 Q-4 22 -11 7Z"} fill="url(#enamel)" stroke="#d8c6b1" strokeWidth="1.1"/>
-              <path d="M-7 -21 Q-3 -24 2 -21" fill="none" stroke="white" strokeWidth="2.3" strokeLinecap="round" opacity=".85"/>
-            </g>;
-          })}
-          <path d="M96 111 Q180 157 264 111" fill="none" stroke="#f8c6b4" strokeWidth="5" strokeLinecap="round" opacity=".7"/>
-        </g>
-      </svg>
-    );
-  }
-
+function ToothArt({ variant = "main" }: { variant?: "main" | "small" | "implant" | "clean" | "arch"; shield?: boolean }) {
+  const src = variant === "arch"
+    ? "/images/dental-arch.svg"
+    : variant === "implant"
+      ? "/images/treatment-implant.svg"
+      : variant === "clean"
+        ? "/images/treatment-cleaning.svg"
+        : "/images/tooth-hero.svg";
+  const alt = variant === "arch"
+    ? "Illustration of a full dental arch with polished teeth and healthy gums"
+    : "Glossy porcelain tooth artwork with soft studio lighting";
   return (
-    <svg viewBox="0 0 220 220" className={`tooth-art tooth-art-${variant}`} role="img" aria-label="3D-style tooth illustration">
-      <defs>
-        <linearGradient id={`toothBody-${variant}`} x1="0" y1="0" x2=".95" y2="1">
-          <stop offset="0" stopColor="#ffffff"/><stop offset=".36" stopColor="#fffdf5"/><stop offset=".7" stopColor="#eee2d1"/><stop offset="1" stopColor="#cbb7a1"/>
-        </linearGradient>
-        <linearGradient id={`toothEdge-${variant}`} x1="0" y1="0" x2="1" y2="1">
-          <stop stopColor="#ffffff"/><stop offset="1" stopColor="#cbb6a0"/>
-        </linearGradient>
-        <filter id={`shadow-${variant}`} x="-30%" y="-30%" width="170%" height="190%">
-          <feDropShadow dx="0" dy="13" stdDeviation="10" floodColor="#3c8d83" floodOpacity=".19"/>
-        </filter>
-        <linearGradient id={`shield-${variant}`} x1="0" y1="0" x2="1" y2="1"><stop stopColor="#51d1c1"/><stop offset="1" stopColor="#0d9c91"/></linearGradient>
-      </defs>
-      <ellipse cx="110" cy="184" rx="61" ry="13" fill="#4daea3" opacity=".15"/>
-      <g filter={`url(#shadow-${variant})`} transform="rotate(-7 110 110)">
-        <path d="M57 61 C48 36 68 21 89 32 C101 38 111 40 124 32 C146 19 169 37 163 65 C158 89 145 104 140 129 C136 149 132 181 117 182 C106 183 105 153 99 136 C91 117 84 150 72 160 C58 172 53 145 57 125 C60 103 66 86 57 61Z" fill={`url(#toothBody-${variant})`} stroke="#e2d3c0" strokeWidth="1.2"/>
-        <path d="M67 57 C69 43 81 39 91 46" fill="none" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" opacity=".9"/>
-        <path d="M127 43 C143 37 154 48 148 66" fill="none" stroke="#fffdf4" strokeWidth="3" strokeLinecap="round" opacity=".7"/>
-        <path d="M73 100 C75 117 67 135 69 148" fill="none" stroke="#ceb99f" strokeWidth="2" strokeLinecap="round" opacity=".55"/>
-        {shield && <g transform="translate(109 102)">
-          <path d="M0 -31 L28 -20 L25 7 Q19 27 0 39 Q-19 27 -25 7 L-28 -20Z" fill={`url(#shield-${variant})`} stroke="#e0fff8" strokeWidth="2"/>
-          <path d="M0 -22 L19 -14 L17 6 Q12 20 0 28 Q-12 20 -17 6 L-19 -14Z" fill="none" stroke="#d6fff6" strokeWidth="1.5" opacity=".8"/>
-          <path d="M-7 -1 L-1 5 L10 -8" fill="none" stroke="#f4fffb" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
-        </g>}
-      </g>
-      <circle cx="174" cy="45" r="4" fill="#ffffff" opacity=".9"/><circle cx="42" cy="124" r="3" fill="#ffffff" opacity=".8"/>
-    </svg>
+    <Image
+      src={src}
+      alt={alt}
+      width={variant === "arch" ? 640 : 640}
+      height={variant === "arch" ? 460 : 640}
+      className={variant === "arch" ? "tooth-arch" : `tooth-art tooth-art-${variant}`}
+      priority={variant === "main"}
+    />
   );
 }
 
@@ -112,7 +78,19 @@ function HealthRing({ score = 85 }: { score?: number }) {
 }
 
 function TreatmentArt({ tone }: { tone: string }) {
-  return <div className={`treatment-art treatment-art-${tone}`}><ToothArt variant="small" /><span className="art-sparkle sparkle-one">✦</span><span className="art-sparkle sparkle-two">✧</span></div>;
+  const art: Record<string, string> = {
+    mint: "/images/treatment-cleaning.svg",
+    peach: "/images/treatment-whitening.svg",
+    lavender: "/images/treatment-implant.svg",
+    aqua: "/images/treatment-aligners.svg",
+    butter: "/images/tooth-hero.svg",
+  };
+  return (
+    <div className={`treatment-art treatment-art-${tone}`}>
+      <Image src={art[tone] ?? "/images/tooth-hero.svg"} alt="" fill sizes="(max-width: 700px) 50vw, 28vw" className="treatment-art-image" />
+      <span className="art-sparkle sparkle-one">✦</span><span className="art-sparkle sparkle-two">✧</span>
+    </div>
+  );
 }
 
 export default function Home() {
