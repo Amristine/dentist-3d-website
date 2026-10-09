@@ -2,11 +2,11 @@
 
 import { useMemo, useState } from "react";
 import {
-  Activity, ArrowDownRight, ArrowRight, ArrowUpRight, Bell, CalendarDays,
+  Activity, ArrowRight, ArrowUpRight, Bell, CalendarDays,
   Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3,
-  ClipboardList, FileText, Filter, HeartPulse, Home, Menu, Search, Settings,
+  ClipboardList, FileText, HeartPulse, Home, Menu, Search, Settings,
   ShieldCheck, Sparkles, Stethoscope, UserRound, WalletCards, X, Plus,
-  SlidersHorizontal, LogOut, CheckCircle2, Download, MoreHorizontal,
+  SlidersHorizontal, LogOut, CheckCircle2, MoreHorizontal,
 } from "lucide-react";
 
 type View = "Overview" | "Appointments" | "Treatments" | "Tooth health" | "My records" | "Profile";
