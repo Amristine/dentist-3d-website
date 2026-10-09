@@ -69,7 +69,7 @@ function ToothArt({ variant = "main" }: { variant?: "main" | "small" | "implant"
 function ArrowDownRecord() { return <ArrowDownToLine size={15} />; }
 
 function BrandMark() {
-  return <div className="brand-mark"><span className="brand-tooth"><svg viewBox="0 0 28 30" aria-hidden="true"><path d="M6 5C2 1 0 6 2 13l4 12c2 5 5 2 6-4l2-5 2 5c2 7 5 8 7 0l3-11c2-7-3-11-7-6-3 3-7 3-13 1Z" fill="currentColor"/></svg></span></div>;
+  return <div className="brand-mark"><span className="brand-tooth"><svg viewBox="0 0 34 36" aria-hidden="true"><path d="M7 7C2 2 1 10 4 17l5 14c1.5 4 5 3 6-2l2-7 2 7c1.5 5 5 6 7 0l4-12c2-7-1-13-6-12-3 .4-5 2-7 2S11 10 7 7Z" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/></svg></span></div>;
 }
 
 function StatCard({ label, value, note, icon: Icon, tone }: { label: string; value: string; note: string; icon: typeof Activity; tone: string }) {
