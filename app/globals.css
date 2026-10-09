@@ -1200,3 +1200,74 @@ body {
   .dentora-thread-messages { padding: 18px 12px; }
   .dentora-message { max-width: 88%; }
 }
+
+
+/* Home is intentionally a concise landing page; detailed tools live on their own routes. */
+.dentora-home-dashboard { grid-template-columns: minmax(0,1fr); }
+.dentora-home-main { gap: 22px; padding: 17px clamp(10px,1.5vw,23px) 24px; }
+.dentora-home-main .dentora-top-grid { grid-template-columns: minmax(0,1.65fr) minmax(250px,.8fr); gap: 15px; }
+.dentora-home-main .dentora-appointment-hero { min-height: 350px; }
+.dentora-home-main .dentora-score-actions { justify-content: center; gap: 14px; }
+.dentora-home-main .dentora-score-card { min-height: 150px; padding: 20px; }
+.dentora-home-main .dentora-quick-card { min-height: 155px; padding: 17px 18px 14px; }
+.dentora-home-main .dentora-quick-actions { gap: 8px; }
+.dentora-home-main .quick-icon { width: 49px; height: 49px; border-radius: 15px; }
+.dentora-home-main .dentora-quick-actions small { font-size: 10px; }
+.dentora-home-next-step {
+  display: grid; grid-template-columns: minmax(210px,.75fr) minmax(0,1.25fr);
+  align-items: center; gap: clamp(16px,2.4vw,34px);
+  padding: clamp(18px,2.3vw,28px);
+  border: 1px solid #e0ece6; border-radius: 22px;
+  background: linear-gradient(115deg,rgba(255,255,253,.98),rgba(240,251,247,.97) 60%,rgba(255,243,235,.96));
+  box-shadow: 0 8px 23px rgba(17,63,68,.045);
+}
+.dentora-home-next-copy .small-eyebrow { color: #70978e; font-size: 8px; }
+.dentora-home-next-copy h2 { margin: 11px 0 8px; max-width: 340px; color: #102c3a; font-size: clamp(20px,2vw,27px); line-height: 1.13; font-weight: 800; letter-spacing: -.9px; }
+.dentora-home-next-copy p { max-width: 380px; margin: 0; color: #5c7782; font-size: 11px; line-height: 1.8; }
+.dentora-home-links { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.dentora-home-links > button { display: flex; align-items: center; min-width: 0; gap: 10px; padding: 12px; border: 1px solid rgba(226,237,232,.95); border-radius: 15px; color: #102d3b; background: rgba(255,255,255,.83); text-align: left; transition: transform .2s, border-color .2s, box-shadow .2s; }
+.dentora-home-links > button:hover { transform: translateY(-2px); border-color: #bce7db; box-shadow: 0 6px 15px rgba(14,105,94,.07); }
+.home-link-icon { display: grid; flex: 0 0 39px; place-items: center; width: 39px; height: 39px; border-radius: 13px; }
+.home-link-icon.mint { background: #ddf7f0; color: #04a7a1; }
+.home-link-icon.peach { background: #fff0e6; color: #cb7955; }
+.home-link-icon.aqua { background: #e3f7f5; color: #059fa4; }
+.home-link-icon.lilac { background: #f0ecff; color: #7b69cf; }
+.dentora-home-links > button > span:nth-child(2) { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 4px; }
+.dentora-home-links strong { font-size: 10px; font-weight: 800; }
+.dentora-home-links small { color: #708690; font-size: 9px; }
+.dentora-home-links > button > svg { flex: 0 0 15px; color: #79929a; }
+@media (max-width: 1160px) {
+  .dentora-home-main .dentora-top-grid { grid-template-columns: minmax(0,1.4fr) minmax(230px,.8fr); }
+  .dentora-home-main .dentora-appointment-hero { min-height: 320px; }
+  .dentora-home-next-step { grid-template-columns: minmax(0,1fr); gap: 17px; }
+}
+@media (max-width: 920px) {
+  .dentora-home-main { padding: 7px 4px 0; }
+  .dentora-home-main .dentora-top-grid { grid-template-columns: 1fr; }
+  .dentora-home-main .dentora-appointment-hero { min-height: 300px; }
+  .dentora-home-main .dentora-score-actions { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); }
+  .dentora-home-next-step { padding: 19px; }
+}
+@media (max-width: 760px) {
+  .dentora-home-main { padding: 6px 0 0; gap: 15px; }
+  .dentora-home-main .dentora-appointment-hero { min-height: 282px; }
+  .dentora-home-main .dentora-score-actions { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .dentora-home-main .dentora-score-card { padding: 12px; min-height: auto; }
+  .dentora-home-main .dentora-quick-card { padding: 12px 10px; min-height: auto; }
+  .dentora-home-main .quick-icon { width: 35px; height: 35px; }
+  .dentora-home-main .dentora-quick-actions small { font-size: 7px; }
+  .dentora-home-next-step { padding: 16px 13px; border-radius: 18px; gap: 13px; }
+  .dentora-home-next-copy h2 { margin: 7px 0 6px; font-size: 21px; }
+  .dentora-home-next-copy p { font-size: 10px; }
+  .dentora-home-links { gap: 7px; }
+  .dentora-home-links > button { padding: 9px 8px; gap: 7px; }
+  .home-link-icon { width: 33px; height: 33px; flex-basis: 33px; border-radius: 10px; }
+  .dentora-home-links strong { font-size: 9px; }
+  .dentora-home-links small { font-size: 8px; }
+}
+@media (max-width: 420px) {
+  .dentora-home-main .dentora-score-actions { grid-template-columns: 1fr; }
+  .dentora-home-main .dentora-score-card { min-height: 104px; }
+  .dentora-home-main .dentora-quick-card { min-height: 110px; }
+  .dentora-home-links { grid-template-columns: 1fr; }
+}
