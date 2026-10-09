@@ -2,17 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Lumière — The Art of Your Smile",
+  title: "DentaCare — Your dental care, made personal",
   description:
-    "A more considered kind of dental care. Discover Lumière Dental Studio, where science meets artistry and every detail begins with you.",
-  applicationName: "Lumière Dental Studio",
-  metadataBase: new URL("https://example.com"),
-  openGraph: {
-    title: "Lumière — The Art of Your Smile",
-    description:
-      "Thoughtful people. Thoughtful care. A new perspective on dentistry.",
-    type: "website",
-  },
+    "A thoughtful dental patient portal to manage appointments, explore treatments, review oral wellness information, and keep your records together.",
+  applicationName: "DentaCare Patient Portal",
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({
