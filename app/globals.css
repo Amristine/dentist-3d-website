@@ -423,7 +423,7 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .record-name { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .record-name > span:last-child { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
 .record-name strong { font-size: 9px; font-weight: 800; }
-.record-name small { font-size: 7px; color: #9bac a2; }
+.record-name small { font-size: 7px; color: #9baca2; }
 .record-icon { width: 33px; height: 36px; display: grid; place-items: center; flex-shrink: 0; border-radius: 8px; color: #0f9f94; background: #e2f7ef; }
 .record-type, .record-date { color: #81968b; font-size: 8px; }
 .record-format { background: #fff0e7; color: #dc8b6c; width: fit-content; border-radius: 5px; padding: 5px 7px; font: 7px var(--mono); }
@@ -453,7 +453,7 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .member-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 7px; color: #0da093; }
 .profile-fields { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; }
 .profile-fields > div { display: flex; flex-direction: column; gap: 9px; padding: 16px 0 13px; border-bottom: 1px solid #f0f3ef; min-width: 0; }
-.profile-fields > div > span { display: flex; align-items: center; gap: 6px; color: #9aac a3; font-size: 8px; }
+.profile-fields > div > span { display: flex; align-items: center; gap: 6px; color: #9aaca3; font-size: 8px; }
 .profile-fields > div > span svg { color: #16a89c; }
 .profile-fields strong { font-size: 8px; overflow-wrap: anywhere; }
 .profile-edit-form { display: flex; flex-direction: column; gap: 13px; padding-top: 16px; }
@@ -479,7 +479,7 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .profile-link-row span svg { color: #12a79b; }
 .profile-link-row:hover { color: #0a9c91; }
 .signout-button { display: flex; align-items: center; gap: 9px; align-self: flex-start; background: transparent; border: 0; color: #d1846b; font-size: 9px; padding: 6px 0; }
-.signout-button span { color: #9bac a2; font-size: 7px; margin-left: 5px; }
+.signout-button span { color: #9baca2; font-size: 7px; margin-left: 5px; }
 
 .modal-scrim { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; padding: 20px; background: rgba(14, 43, 36, .38); backdrop-filter: blur(7px); animation: fade-in .18s ease-out; }
 .booking-modal { background: #fffefa; border: 1px solid rgba(255,255,255,.7); box-shadow: 0 25px 80px rgba(25,68,55,.22); width: min(100%, 420px); border-radius: 22px; padding: 25px; animation: modal-in .25s cubic-bezier(.2,.8,.2,1); }
