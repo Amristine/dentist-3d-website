@@ -383,7 +383,7 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .stat-icon { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; }
 .stat-label { color: #8ba096; font-size: 8px; }
 .stat-card > strong { font-size: 21px; letter-spacing: -.6px; color: #2b564c; }
-.stat-card > small { color: #9daf a7; font-size: 7px; line-height: 1.6; }
+.stat-card > small { color: #9dafa7; font-size: 7px; line-height: 1.6; }
 .stat-green .stat-icon { color: #0aa196; background: #dbf7ef; }
 .stat-purple .stat-icon { color: #917ed1; background: #eee9ff; }
 .stat-coral .stat-icon { color: #e78b70; background: #ffede5; }
