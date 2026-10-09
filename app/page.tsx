@@ -44,12 +44,12 @@ const slots = ["09:00 AM", "10:00 AM", "10:30 AM", "11:00 AM", "02:00 PM", "03:0
 
 function ToothArt({ variant = "main" }: { variant?: "main" | "small" | "implant" | "clean" | "arch"; shield?: boolean }) {
   const src = variant === "arch"
-    ? "/images/dental-arch.svg"
+    ? "/images/dental-arch.png"
     : variant === "implant"
-      ? "/images/treatment-implant.svg"
+      ? "/images/treatment-implant.png"
       : variant === "clean"
-        ? "/images/treatment-cleaning.svg"
-        : "/images/tooth-hero.svg";
+        ? "/images/treatment-cleaning.png"
+        : "/images/tooth-hero.png";
   const alt = variant === "arch"
     ? "Illustration of a full dental arch with polished teeth and healthy gums"
     : "Glossy porcelain tooth artwork with soft studio lighting";
@@ -79,15 +79,15 @@ function HealthRing({ score = 85 }: { score?: number }) {
 
 function TreatmentArt({ tone }: { tone: string }) {
   const art: Record<string, string> = {
-    mint: "/images/treatment-cleaning.svg",
-    peach: "/images/treatment-whitening.svg",
-    lavender: "/images/treatment-implant.svg",
-    aqua: "/images/treatment-aligners.svg",
-    butter: "/images/tooth-hero.svg",
+    mint: "/images/treatment-cleaning.png",
+    peach: "/images/treatment-whitening.png",
+    lavender: "/images/treatment-implant.png",
+    aqua: "/images/treatment-aligners.png",
+    butter: "/images/tooth-hero.png",
   };
   return (
     <div className={`treatment-art treatment-art-${tone}`}>
-      <Image src={art[tone] ?? "/images/tooth-hero.svg"} alt="" fill sizes="(max-width: 700px) 50vw, 28vw" className="treatment-art-image" />
+      <Image src={art[tone] ?? "/images/tooth-hero.png"} alt="" fill sizes="(max-width: 700px) 50vw, 28vw" className="treatment-art-image" />
       <span className="art-sparkle sparkle-one">✦</span><span className="art-sparkle sparkle-two">✧</span>
     </div>
   );
@@ -240,6 +240,20 @@ export default function Home() {
                 <div className="health-card-body"><div className="health-score-visual"><HealthRing /><span className="score-sparkle">✦</span></div><div className="health-score-copy"><div className="score-title-row"><h3>Looking good, {patientName.split(" ")[0]} <span>✦</span></h3><span className="score-pill">Very good</span></div><p>This is a sample wellness score from your demo profile. Your dental professional can add verified findings after an assessment.</p><div className="score-progress"><span style={{ width: "85%" }} /></div><div className="score-progress-meta"><span>Wellness overview</span><strong>85 / 100</strong></div><button className="inline-link" onClick={() => navigate("Tooth health")}>View health report <ArrowRight size={14} /></button></div></div>
                 <div className="health-card-stats"><div><span className="health-stat-icon mint"><ShieldCheck size={15} /></span><span><small>Gum health</small><strong>Good</strong></span></div><div><span className="health-stat-icon lavender"><Sparkles size={15} /></span><span><small>Last check-up</small><strong>Aug 14, 2026</strong></span></div><div><span className="health-stat-icon peach"><Activity size={15} /></span><span><small>Next step</small><strong>Routine visit</strong></span></div></div>
               </section>
+
+              <section className="care-essentials">
+                <div className="section-heading"><div><span className="small-eyebrow">LITTLE HABITS, BIG DIFFERENCE</span><h2>Everyday essentials</h2></div><button className="plain-link" onClick={() => navigate("Tooth health")}>Care tips <ArrowRight size={14} /></button></div>
+                <div className="care-essentials-grid">
+                  <button className="care-essential-card care-brush" onClick={() => navigate("Tooth health")}>
+                    <div><span className="care-label">DAILY ROUTINE</span><strong>Brush gently.<br />Smile confidently.</strong><small>Explore oral care basics <ArrowRight size={12} /></small></div>
+                    <Image src="/images/toothbrush-care.png" alt="" width={460} height={360} />
+                  </button>
+                  <button className="care-essential-card care-floss" onClick={() => navigate("Tooth health")}>
+                    <div><span className="care-label">DON’T SKIP THE DETAILS</span><strong>A little floss<br />goes a long way.</strong><small>Explore oral care basics <ArrowRight size={12} /></small></div>
+                    <Image src="/images/floss-care.png" alt="" width={460} height={360} />
+                  </button>
+                </div>
+              </section>
             </div>
 
             <aside className="dashboard-side-column">
@@ -257,7 +271,7 @@ export default function Home() {
               </section>
 
               <section className="recommended-card">
-                <div className="recommend-top"><span className="small-eyebrow">A GENTLE NUDGE</span><Sparkles size={17} /></div><div className="recommend-art"><ToothArt variant="small" /></div><h3>Keep your smile<br /><em>feeling fresh.</em></h3><p>A routine check-up is a good way to keep in touch with your oral health.</p><button className="outline-button" onClick={() => startBooking("Dental check-up")}>Find a time <ArrowRight size={14} /></button>
+                <div className="recommend-top"><span className="small-eyebrow">A GENTLE NUDGE</span><Sparkles size={17} /></div><div className="recommend-art"><Image src="/images/toothbrush-care.png" alt="" width={460} height={360} className="recommend-care-image" /></div><h3>Keep your smile<br /><em>feeling fresh.</em></h3><p>A routine check-up is a good way to keep in touch with your oral health.</p><button className="outline-button" onClick={() => startBooking("Dental check-up")}>Find a time <ArrowRight size={14} /></button>
               </section>
             </aside>
           </div>}
