@@ -59,12 +59,12 @@ const PATH_VIEWS: Record<string, View> = Object.fromEntries(
 
 function ToothArt({ variant = "main" }: { variant?: "main" | "small" | "implant" | "clean" | "arch"; shield?: boolean }) {
   const src = variant === "arch"
-    ? "/images/dental-arch.svg"
+    ? "/images/dental-arch.webp"
     : variant === "implant"
-      ? "/images/treatment-implant.svg"
+      ? "/images/dental-implant.webp"
       : variant === "clean"
-        ? "/images/treatment-cleaning.svg"
-        : "/images/tooth-hero.svg";
+        ? "/images/teeth-cleaning.webp"
+        : "/images/hero-tooth.webp";
   const alt = variant === "arch"
     ? "Illustration of a full dental arch with polished teeth and healthy gums"
     : "Glossy porcelain tooth artwork with soft studio lighting";
@@ -94,15 +94,15 @@ function HealthRing({ score = 85 }: { score?: number }) {
 
 function TreatmentArt({ tone }: { tone: string }) {
   const art: Record<string, string> = {
-    mint: "/images/treatment-cleaning.svg",
-    peach: "/images/treatment-whitening.svg",
-    lavender: "/images/treatment-implant.svg",
-    aqua: "/images/treatment-aligners.svg",
-    butter: "/images/tooth-hero.svg",
+    mint: "/images/teeth-cleaning.webp",
+    peach: "/images/teeth-whitening.webp",
+    lavender: "/images/dental-implant.webp",
+    aqua: "/images/clear-aligners.webp",
+    butter: "/images/hero-tooth.webp",
   };
   return (
     <div className={`treatment-art treatment-art-${tone}`}>
-      <Image unoptimized src={art[tone] ?? "/images/tooth-hero.svg"} alt="" fill sizes="(max-width: 700px) 50vw, 28vw" className="treatment-art-image" />
+      <Image unoptimized src={art[tone] ?? "/images/hero-tooth.webp"} alt="" fill sizes="(max-width: 700px) 50vw, 28vw" className="treatment-art-image" />
       <span className="art-sparkle sparkle-one">✦</span><span className="art-sparkle sparkle-two">✧</span>
     </div>
   );
@@ -210,7 +210,7 @@ export default function DashboardClient() {
           })}
         </nav>
         <div className="sidebar-spacer" />
-        <button className="dentora-sidebar-promo" onClick={() => navigate("Tooth health")}><span><strong>Be Consistent</strong><small>For a Healthier Smile</small></span><i><ArrowRight size={17} /></i><Image unoptimized src="/images/treatment-cleaning.svg" alt="" fill sizes="220px" /></button>
+        <button className="dentora-sidebar-promo" onClick={() => navigate("Tooth health")}><span><strong>Be Consistent</strong><small>For a Healthier Smile</small></span><i><ArrowRight size={17} /></i><Image unoptimized src="/images/teeth-cleaning.webp" alt="" fill sizes="220px" /></button>
         <button className="sidebar-settings" onClick={() => navigate("Profile")}><Settings size={17} /> Settings <ArrowUpRight size={14} /></button>
         <button className="dentora-sidebar-doctor" onClick={() => notify("Dr. Sarah Johnson is the sample clinician for this demo.")}><Image unoptimized src="/images/dr-sarah.svg" alt="" width={48} height={48} /><span><strong>Dr. Sarah Johnson</strong><small>Orthodontist</small><em><i /> Available Now</em></span><ChevronRight size={17} /></button>
       </aside>
@@ -252,7 +252,7 @@ export default function DashboardClient() {
 
               <div className="dentora-top-grid">
                 <section className="dentora-appointment-hero">
-                  <Image unoptimized src="/images/tooth-hero.svg" alt="Scalable dental tooth illustration in a mint and aqua setting" fill priority sizes="(max-width: 900px) 100vw, 65vw" className="dentora-hero-image" />
+                  <Image unoptimized src="/images/hero-tooth.webp" alt="Scalable dental tooth illustration in a mint and aqua setting" fill priority sizes="(max-width: 900px) 100vw, 65vw" className="dentora-hero-image" />
                   <div className="dentora-hero-overlay" />
                   <div className="dentora-hero-copy"><span>Your Next Appointment</span><h2>Teeth Cleaning</h2>
                     <div className="dentora-hero-meta"><Stethoscope size={16} /><span>Dr. Sarah Johnson</span></div>
