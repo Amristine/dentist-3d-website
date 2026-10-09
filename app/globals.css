@@ -507,6 +507,31 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .toast-message button { display: grid; place-items: center; border: 0; background: transparent; color: #8ca397; padding: 3px; }
 .mobile-bottom-nav { display: none; }
 
+
+/* High-resolution dental image assets */
+.treatment-art { isolation: isolate; }
+.treatment-art-image { position: absolute !important; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .45s cubic-bezier(.2,.7,.2,1), filter .35s; }
+.catalog-card:hover .treatment-art-image { transform: scale(1.045); filter: saturate(1.04); }
+.treatment-art .art-sparkle { z-index: 2; text-shadow: 0 1px 8px rgba(255,255,255,.45); }
+.recommend-art { overflow: hidden; border-radius: 15px; }
+.recommend-care-image { display: block; width: 100%; height: 100%; object-fit: cover; }
+.care-essentials { padding: 0 1px; }
+.care-essentials-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.care-essential-card { position: relative; isolation: isolate; min-width: 0; min-height: 145px; overflow: hidden; display: flex; align-items: center; text-align: left; border: 1px solid #e0eee5; border-radius: 15px; padding: 15px 13px; color: #244c44; background: #e7f8f0; transition: transform .22s, box-shadow .22s; }
+.care-essential-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.care-essential-card::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(246,255,250,.97) 0%, rgba(246,255,250,.91) 42%, rgba(246,255,250,.05) 100%); pointer-events: none; }
+.care-essential-card > div { z-index: 2; position: relative; display: flex; flex-direction: column; align-items: flex-start; max-width: 72%; gap: 8px; }
+.care-essential-card > img { position: absolute; z-index: 0; right: 0; top: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
+.care-essential-card:hover > img { transform: scale(1.05); }
+.care-brush { background: #d4f5ea; }
+.care-floss { background: #ffe8dd; border-color: #f5dfd2; }
+.care-floss::after { background: linear-gradient(90deg, rgba(255,248,242,.97) 0%, rgba(255,248,242,.9) 42%, rgba(255,248,242,.05) 100%); }
+.care-label { font: 6px var(--mono); letter-spacing: .75px; color: #0da195; }
+.care-floss .care-label { color: #cb8568; }
+.care-essential-card strong { font-size: 10px; line-height: 1.35; letter-spacing: -.25px; }
+.care-essential-card small { display: inline-flex; align-items: center; gap: 4px; color: #75978a; font-size: 7px; white-space: nowrap; }
+.care-floss small { color: #b08472; }
+
 @media (min-width: 1500px) {
   .sidebar { width: 260px; }
   .app-main { margin-left: 260px; }
