@@ -5,14 +5,14 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  Activity, ArrowDownToLine, ArrowRight, ArrowUpRight, Bell, CalendarDays,
+  Activity, ArrowDownToLine, ArrowRight, ArrowUpRight, Bell, CalendarDays, MessageCircle, Send,
   Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3,
   ClipboardList, FileText, HeartPulse, Home as HomeIcon, Menu, Search, Settings,
   ShieldCheck, Sparkles, Stethoscope, UserRound, WalletCards, X, Plus,
-  SlidersHorizontal, LogOut, CheckCircle2, MoreHorizontal,
+  SlidersHorizontal, LogOut, CheckCircle2,
 } from "lucide-react";
 
-type View = "Overview" | "Appointments" | "Treatments" | "Tooth health" | "My records" | "Profile";
+type View = "Overview" | "Appointments" | "Treatments" | "Tooth health" | "My records" | "Messages" | "Profile";
 type Treatment = { id: string; name: string; category: string; price: string; duration: string; description: string; detail: string; tone: string; };
 type Booking = { id: number; treatment: string; date: string; time: string; doctor: string; status: string; };
 
@@ -22,6 +22,7 @@ const NAV: { label: View; icon: LucideIcon }[] = [
   { label: "Treatments", icon: Sparkles },
   { label: "Tooth health", icon: HeartPulse },
   { label: "My records", icon: ClipboardList },
+  { label: "Messages", icon: MessageCircle },
   { label: "Profile", icon: UserRound },
 ];
 
@@ -115,6 +116,7 @@ export default function Home() {
   const [profileEdit, setProfileEdit] = useState(false);
   const [patientName, setPatientName] = useState("Alex Johnson");
   const [patientEmail, setPatientEmail] = useState("alex.johnson@email.com");
+  const [messageDraft, setMessageDraft] = useState("");
 
   const allTreatments = TREATMENTS;
   const filteredTreatments = useMemo(() => allTreatments.filter((t) => {
@@ -161,6 +163,7 @@ export default function Home() {
     "Treatments": "Explore treatments",
     "Tooth health": "Your tooth health",
     "My records": "My records",
+    "Messages": "Messages",
     "Profile": "My profile",
   };
   const pageSubtitle: Record<View, string> = {
@@ -169,6 +172,7 @@ export default function Home() {
     "Treatments": "Thoughtful care, tailored to what you need.",
     "Tooth health": "A little progress goes a long way.",
     "My records": "Your dental information, all in one place.",
+    "Messages": "A calm place to keep in touch with your care team.",
     "Profile": "Your details and preferences.",
   };
 
@@ -188,7 +192,7 @@ export default function Home() {
           {NAV.map((item) => {
             const Icon = item.icon;
             return <button key={item.label} className={`sidebar-link ${activeView === item.label ? "active" : ""}`} onClick={() => navigate(item.label)}>
-              <Icon size={18} strokeWidth={activeView === item.label ? 2.3 : 1.8} /><span>{item.label === "Overview" ? "Home" : item.label === "My records" ? "Records" : item.label}</span>{item.label === "Appointments" && bookings.length > 0 && <i className="nav-count">{bookings.length}</i>}
+              <Icon size={18} strokeWidth={activeView === item.label ? 2.3 : 1.8} /><span>{item.label === "Overview" ? "Home" : item.label === "My records" ? "Records" : item.label}</span>{item.label === "Messages" && <i className="messages-nav-dot" />}{item.label === "Appointments" && bookings.length > 0 && <i className="nav-count">{bookings.length}</i>}
             </button>;
           })}
         </nav>
@@ -353,6 +357,28 @@ export default function Home() {
             <div className="records-toolbar"><div><h2>Recent documents</h2><p>Sample records for preview only.</p></div><button className="outline-button" onClick={() => notify("Secure uploads will be connected to the practice record system.")}><Plus size={15} /> Add document</button></div>
             <div className="records-table"><div className="records-table-head"><span>DOCUMENT</span><span>TYPE</span><span>DATE ADDED</span><span>FILE</span><span /></div>{RECORDS.map((r) => <div className="record-row" key={r.title}><span className="record-name"><span className="record-icon"><FileText size={18} /></span><span><strong>{r.title}</strong><small>{r.size}</small></span></span><span className="record-type">{r.type}</span><span className="record-date">{r.date}</span><span className="record-format">PDF</span><button className="record-action" onClick={() => notify(`“${r.title}” is sample content. Connect secure records before real use.`)} aria-label={`View ${r.title}`}><ArrowUpRight size={16} /></button></div>)}</div>
             <div className="privacy-note"><ShieldCheck size={17} /><span><strong>Your privacy matters.</strong><small>In production, documents should be stored securely and only accessible to the authenticated patient and authorised clinic staff.</small></span></div>
+          </section>}
+
+          {activeView === "Messages" && <section className="dentora-messages-view">
+            <aside className="dentora-inbox-panel">
+              <div className="dentora-inbox-heading"><span className="small-eyebrow">YOUR CARE TEAM</span><h2>Inbox <span>2 new</span></h2></div>
+              <label className="dentora-inbox-search"><Search size={15} /><input placeholder="Search conversations..." /></label>
+              <button className="dentora-conversation selected"><Image src="/images/dr-sarah.svg" alt="" width={45} height={45} /><span><strong>Dr. Sarah Johnson <i>2</i></strong><small>Let’s review your next visit...</small></span><time>10:42</time></button>
+              <button className="dentora-conversation"><span className="dentora-team-avatar"><MessageCircle size={19} /></span><span><strong>Care team</strong><small>Your appointment is confirmed.</small></span><time>Yesterday</time></button>
+              <button className="dentora-conversation"><span className="dentora-billing-avatar"><FileText size={18} /></span><span><strong>Billing & records</strong><small>Your treatment plan is ready.</small></span><time>Oct 02</time></button>
+              <p className="dentora-message-demo-note">Sample conversations for the interface preview.</p>
+            </aside>
+            <section className="dentora-thread-panel">
+              <header className="dentora-thread-header"><Image src="/images/dr-sarah.svg" alt="" width={44} height={44} /><span><strong>Dr. Sarah Johnson</strong><small><i /> General dentistry · Sample contact</small></span><button onClick={() => notify("Clinic contact details can be configured in Profile.")} aria-label="Contact details"><ArrowUpRight size={17} /></button></header>
+              <div className="dentora-thread-messages">
+                <div className="dentora-thread-date">Today · October 9</div>
+                <div className="dentora-message incoming">Hi Alex! A quick reminder that your next dental visit is coming up on October 12. <time>9:38 AM</time></div>
+                <div className="dentora-message outgoing">Thank you! Could we confirm the appointment time? <time>10:05 AM</time></div>
+                <div className="dentora-message incoming">Of course — the demo appointment is set for 10:30 AM. See you soon! <time>10:42 AM</time></div>
+              </div>
+              <form className="dentora-message-composer" onSubmit={(e) => { e.preventDefault(); if (!messageDraft.trim()) return; setMessageDraft(""); notify("Demo only: your message was not sent to a real clinic."); }}><input value={messageDraft} onChange={(e) => setMessageDraft(e.target.value)} placeholder="Write a message..." aria-label="Message text" /><button type="submit" aria-label="Send message"><Send size={17} /></button></form>
+              <p className="dentora-message-demo-note">Demo inbox only · connect a secure messaging service before using patient data.</p>
+            </section>
           </section>}
 
           {activeView === "Profile" && <section className="profile-view">
