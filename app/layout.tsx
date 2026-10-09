@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DentaCare — Your dental care, made personal",
+  title: "Dentora — Dental Care",
   description:
-    "A thoughtful dental patient portal to manage appointments, explore treatments, review oral wellness information, and keep your records together.",
-  applicationName: "DentaCare Patient Portal",
+    "Dentora Dental Care — a modern patient dashboard for appointments, treatments, and oral wellness.",
+  applicationName: "Dentora Dental Care Portal",
   robots: { index: false, follow: false },
 };
 
