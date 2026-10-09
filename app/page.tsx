@@ -57,8 +57,8 @@ function ToothArt({ variant = "main" }: { variant?: "main" | "small" | "implant"
     <Image
       src={src}
       alt={alt}
-      width={variant === "arch" ? 640 : 640}
-      height={variant === "arch" ? 460 : 640}
+      width={240}
+      height={variant === "arch" ? 139 : 227}
       className={variant === "arch" ? "tooth-arch" : `tooth-art tooth-art-${variant}`}
       priority={variant === "main"}
     />
