@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  Activity, ArrowRight, ArrowUpRight, Bell, CalendarDays,
+  Activity, ArrowDownToLine, ArrowRight, ArrowUpRight, Bell, CalendarDays,
   Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3,
   ClipboardList, FileText, HeartPulse, Home as HomeIcon, Menu, Search, Settings,
   ShieldCheck, Sparkles, Stethoscope, UserRound, WalletCards, X, Plus,
@@ -35,9 +35,10 @@ const TREATMENTS: Treatment[] = [
 ];
 
 const RECORDS = [
-  { title: "Dental health summary", type: "Health report", date: "Oct 02, 2026", size: "PDF · 1.2 MB" },
-  { title: "Cleaning visit notes", type: "Visit summary", date: "Aug 14, 2026", size: "PDF · 860 KB" },
-  { title: "Treatment estimate", type: "Estimate", date: "Aug 14, 2026", size: "PDF · 420 KB" },
+  { title: "Dental X-ray", type: "Imaging", date: "May 12, 2024", size: "2.4 MB" },
+  { title: "Treatment Plan", type: "Care plan", date: "May 05, 2024", size: "1.1 MB" },
+  { title: "Prescription", type: "Prescription", date: "Apr 28, 2024", size: "500 KB" },
+  { title: "Insurance Document", type: "Insurance", date: "Apr 10, 2024", size: "1.8 MB" },
 ];
 
 const slots = ["09:00 AM", "10:00 AM", "10:30 AM", "11:00 AM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM"];
@@ -64,6 +65,8 @@ function ToothArt({ variant = "main" }: { variant?: "main" | "small" | "implant"
     />
   );
 }
+
+function ArrowDownRecord() { return <ArrowDownToLine size={15} />; }
 
 function BrandMark() {
   return <div className="brand-mark"><span className="brand-tooth"><svg viewBox="0 0 28 30" aria-hidden="true"><path d="M6 5C2 1 0 6 2 13l4 12c2 5 5 2 6-4l2-5 2 5c2 7 5 8 7 0l3-11c2-7-3-11-7-6-3 3-7 3-13 1Z" fill="currentColor"/></svg></span></div>;
@@ -175,30 +178,30 @@ export default function Home() {
         <div className="sidebar-brand">
           <a className="brand-lockup" href="#" onClick={(e) => { e.preventDefault(); navigate("Overview"); }}>
             <BrandMark />
-            <span className="brand-name">denta<span>CARE, MADE PERSONAL</span></span>
+            <span className="brand-name">Dentora<span>DENTAL CARE</span></span>
           </a>
           <button className="sidebar-close" onClick={() => setMobileNavOpen(false)} aria-label="Close menu"><X size={19} /></button>
         </div>
-        <div className="sidebar-clinic"><span className="clinic-avatar"><Stethoscope size={18} /></span><span><strong>Lumière Dental</strong><small>Patient portal</small></span><ChevronDown size={15} /></div>
+        <div className="sidebar-clinic"><span className="clinic-avatar"><Stethoscope size={18} /></span><span><strong>Dentora Dental</strong><small>Patient portal</small></span><ChevronDown size={15} /></div>
         <div className="sidebar-section-label">YOUR SPACE</div>
         <nav className="sidebar-nav" aria-label="Main navigation">
           {NAV.map((item) => {
             const Icon = item.icon;
             return <button key={item.label} className={`sidebar-link ${activeView === item.label ? "active" : ""}`} onClick={() => navigate(item.label)}>
-              <Icon size={18} strokeWidth={activeView === item.label ? 2.3 : 1.8} /><span>{item.label}</span>{item.label === "Appointments" && bookings.length > 0 && <i className="nav-count">{bookings.length}</i>}
+              <Icon size={18} strokeWidth={activeView === item.label ? 2.3 : 1.8} /><span>{item.label === "Overview" ? "Home" : item.label === "My records" ? "Records" : item.label}</span>{item.label === "Appointments" && bookings.length > 0 && <i className="nav-count">{bookings.length}</i>}
             </button>;
           })}
         </nav>
         <div className="sidebar-spacer" />
-        <div className="help-card"><div className="help-icon"><CircleHelp size={17} /></div><strong>Need a little help?</strong><p>Our care team is only a message away.</p><button onClick={() => notify("The care team contact form will be connected before launch.")}>Contact support <ArrowUpRight size={13} /></button></div>
+        <button className="dentora-sidebar-promo" onClick={() => navigate("Tooth health")}><span><strong>Be Consistent</strong><small>For a Healthier Smile</small></span><i><ArrowRight size={17} /></i><Image src="/images/teeth-cleaning.webp" alt="" fill sizes="220px" /></button>
         <button className="sidebar-settings" onClick={() => navigate("Profile")}><Settings size={17} /> Settings <ArrowUpRight size={14} /></button>
-        <div className="sidebar-user"><div className="user-avatar">AJ</div><span><strong>{patientName}</strong><small>Member since 2024</small></span><MoreHorizontal size={18} /></div>
+        <button className="dentora-sidebar-doctor" onClick={() => notify("Dr. Sarah Johnson is the sample clinician for this demo.")}><Image src="/images/dr-sarah.svg" alt="" width={48} height={48} /><span><strong>Dr. Sarah Johnson</strong><small>Orthodontist</small><em><i /> Available Now</em></span><ChevronRight size={17} /></button>
       </aside>
 
       {mobileNavOpen && <button className="sidebar-scrim" aria-label="Close menu" onClick={() => setMobileNavOpen(false)} />}
 
       <div className="app-main">
-        <header className="topbar">
+        <header className={`topbar ${activeView === "Overview" ? "topbar-hidden-overview" : ""}`}>
           <div className="mobile-brand"><button className="topbar-menu" onClick={() => setMobileNavOpen(true)} aria-label="Open menu"><Menu size={21} /></button><BrandMark /><span>denta<span>CARE</span></span></div>
           <div className="breadcrumb"><span>Workspace</span><ChevronRight size={14} /><strong>{pageTitle[activeView]}</strong></div>
           <div className="topbar-actions">
@@ -212,66 +215,97 @@ export default function Home() {
         </header>
 
         <main className="page-content">
-          <div className="page-heading">
-            <div><div className="page-eyebrow"><span className="eyebrow-dot" /> YOUR SMILE, YOUR WAY</div><h1>{activeView === "Overview" ? <>Good morning, <em>{patientName.split(" ")[0]}.</em> <span className="wave">✦</span></> : pageTitle[activeView]}</h1><p>{pageSubtitle[activeView]}</p></div>
+          {activeView !== "Overview" && <div className="page-heading">
+            <div><div className="page-eyebrow"><span className="eyebrow-dot" /> YOUR SMILE, YOUR WAY</div><h1>{pageTitle[activeView]}</h1><p>{pageSubtitle[activeView]}</p></div>
             <div className="heading-actions"><span className="last-visit"><span className="status-dot" /> Patient portal <span className="heading-separator">/</span> <span>Oct 2026</span></span>{activeView === "Appointments" && <button className="primary-button compact" onClick={() => startBooking()}><Plus size={16} /> Book visit</button>}</div>
-          </div>
+          </div>}
 
-          {activeView === "Overview" && <div className="dashboard-grid">
-            <div className="dashboard-main-column">
-              <section className="welcome-banner">
-                <div className="welcome-copy"><span className="banner-kicker"><Sparkles size={13} /> YOUR NEXT CHAPTER</span><h2>A healthier smile<br />looks good on you.</h2><p>Your next visit is one small step toward feeling your best.</p><button className="banner-button" onClick={() => navigate("Appointments")}>View appointment <ArrowUpRight size={15} /></button><div className="banner-pagination"><span className="active" /><span /><span /></div></div>
-                <div className="banner-visual"><div className="banner-orbit orbit-one" /><div className="banner-orbit orbit-two" /><div className="banner-glow" /><ToothArt variant="main" shield /><span className="banner-float float-top"><ShieldCheck size={15} /> Care first</span><span className="banner-float float-bottom"><Sparkles size={13} /> All smiles</span></div>
-                <span className="banner-index">D / 01</span>
-              </section>
+          {activeView === "Overview" && <div className="dentora-dashboard">
+            <div className="dentora-main-column">
+              <div className="dentora-greeting-row">
+                <div className="dentora-greeting"><span>Good Morning,</span><h1>{patientName.split(" ")[0]} <span className="dentora-wave">👋</span></h1><p>A healthier smile starts with small steps.</p></div>
+                <div className="dentora-header-actions">
+                  <label className="dentora-search"><Search size={17} /><input value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && navigate("Treatments")} placeholder="Search treatments, doctors..." /></label>
+                  <div className="notification-wrap"><button className="dentora-round-button" onClick={() => setNotificationsOpen(!notificationsOpen)} aria-label="Notifications"><Bell size={19} /><span className="notification-dot" /></button>
+                    {notificationsOpen && <div className="notification-popover"><div className="popover-head"><strong>Notifications</strong><span>2 new</span></div><div className="notification-item"><span className="notification-symbol"><CalendarDays size={15} /></span><div><strong>Appointment reminder</strong><p>Your upcoming visit is on Oct 12 at 10:30 AM.</p><small>Just now</small></div></div><div className="notification-item"><span className="notification-symbol peach"><HeartPulse size={15} /></span><div><strong>Keep your streak going</strong><p>It’s been a little while since your last check-up.</p><small>Yesterday</small></div></div><button className="popover-action" onClick={() => { setNotificationsOpen(false); navigate("Appointments"); }}>View appointments <ArrowRight size={14} /></button></div>}
+                  </div>
+                  <button className="dentora-profile-button" onClick={() => navigate("Profile")} aria-label="Open profile"><Image src="/images/patient-alex.svg" alt="" width={42} height={42} /><span className="profile-online-dot" /></button>
+                </div>
+              </div>
 
-              <section className="quick-actions-section">
-                <div className="section-heading"><div><span className="small-eyebrow">ONE-TAP ACCESS</span><h2>Quick actions</h2></div><button className="plain-link" onClick={() => navigate("Appointments")}>See all <ArrowRight size={14} /></button></div>
-                <div className="quick-actions">
-                  <button onClick={() => startBooking("Dental check-up")} className="quick-action"><span className="quick-action-icon teal"><CalendarDays size={19} /></span><strong>Book a visit</strong><small>Choose your time</small><ArrowUpRight className="quick-arrow" size={15} /></button>
-                  <button onClick={() => navigate("Treatments")} className="quick-action"><span className="quick-action-icon lilac"><Sparkles size={19} /></span><strong>Find treatment</strong><small>Explore your options</small><ArrowUpRight className="quick-arrow" size={15} /></button>
-                  <button onClick={() => navigate("Tooth health")} className="quick-action"><span className="quick-action-icon coral"><HeartPulse size={19} /></span><strong>Tooth health</strong><small>See your progress</small><ArrowUpRight className="quick-arrow" size={15} /></button>
-                  <button onClick={() => navigate("My records")} className="quick-action"><span className="quick-action-icon blue"><FileText size={19} /></span><strong>My records</strong><small>Reports and notes</small><ArrowUpRight className="quick-arrow" size={15} /></button>
+              <div className="dentora-top-grid">
+                <section className="dentora-appointment-hero">
+                  <Image src="/images/hero-tooth.webp" alt="Glossy tooth artwork surrounded by fresh botanical details" fill priority sizes="(max-width: 900px) 100vw, 55vw" className="dentora-hero-image" />
+                  <div className="dentora-hero-overlay" />
+                  <div className="dentora-hero-copy"><span>Your Next Appointment</span><h2>Teeth Cleaning</h2>
+                    <div className="dentora-hero-meta"><Stethoscope size={16} /><span>Dr. Sarah Johnson</span></div>
+                    <div className="dentora-hero-meta"><CalendarDays size={16} /><span>12 October 2026</span></div>
+                    <div className="dentora-hero-meta"><Clock3 size={16} /><span>10:30 AM</span></div>
+                    <button onClick={() => { setSelectedDate(12); setSelectedTime("10:30 AM"); navigate("Appointments"); }}>Reschedule <span><ArrowRight size={17} /></span></button>
+                  </div>
+                  <div className="dentora-hero-glint glint-one" /><div className="dentora-hero-glint glint-two" />
+                </section>
+                <div className="dentora-score-actions">
+                  <section className="dentora-score-card"><h2>Dental Health Score</h2><div className="dentora-score-content"><HealthRing score={85} /><div><strong>Great! <span>✨</span></strong><p>You’re doing amazing.<br />Keep it up!</p></div></div></section>
+                  <section className="dentora-quick-card"><h2>Quick Actions</h2><div className="dentora-quick-actions">
+                    <button onClick={() => startBooking("Dental check-up")}><span className="quick-icon mint"><CalendarDays size={20} /></span><small>Book<br />Appointment</small></button>
+                    <button onClick={() => notify("Doctor search will be connected to the clinic directory.")}><span className="quick-icon aqua"><UserRound size={20} /></span><small>Find<br />Doctor</small></button>
+                    <button onClick={() => navigate("Treatments")}><span className="quick-icon lilac"><Sparkles size={20} /></span><small>Treatments</small></button>
+                    <button onClick={() => notify("For a medical emergency, contact local emergency services or your care provider.")}><span className="quick-icon rose"><Plus size={21} /></span><small>Emergency</small></button>
+                  </div></section>
+                </div>
+              </div>
+
+              <section className="dentora-recommendations">
+                <div className="dentora-section-title"><h2>Recommended for You</h2><button onClick={() => navigate("Tooth health")}>See All <ArrowRight size={14} /></button></div>
+                <div className="dentora-recommend-grid">
+                  <button className="dentora-recommend-card recommend-brush" onClick={() => navigate("Tooth health")}><span className="recommend-copy"><strong>Daily Brushing</strong><small>Keep your teeth clean<br />and healthy.</small><i><ArrowRight size={17} /></i></span><Image src="/images/toothbrush.webp" alt="Toothbrush and dental care illustration" fill sizes="(max-width: 700px) 100vw, 25vw" /></button>
+                  <button className="dentora-recommend-card recommend-floss" onClick={() => navigate("Tooth health")}><span className="recommend-copy"><strong>Use Floss</strong><small>Prevents plaque<br />and gum problems.</small><i><ArrowRight size={17} /></i></span><Image src="/images/dental-floss.webp" alt="Dental floss illustration" fill sizes="(max-width: 700px) 100vw, 25vw" /></button>
+                  <button className="dentora-recommend-card recommend-checkup" onClick={() => startBooking("Dental check-up")}><span className="recommend-copy"><strong>Regular Checkup</strong><small>Early detection for<br />a brighter smile.</small><i><ArrowRight size={17} /></i></span><Image src="/images/teeth-cleaning.webp" alt="Illustration for a routine dental check-up" fill sizes="(max-width: 700px) 100vw, 25vw" /></button>
                 </div>
               </section>
 
-              <section className="health-overview-card">
-                <div className="section-heading"><div><span className="small-eyebrow">YOUR ORAL WELLNESS</span><h2>Dental health score</h2></div><button className="more-button" onClick={() => navigate("Tooth health")} aria-label="View dental health"><ArrowUpRight size={17} /></button></div>
-                <div className="health-card-body"><div className="health-score-visual"><HealthRing /><span className="score-sparkle">✦</span></div><div className="health-score-copy"><div className="score-title-row"><h3>Looking good, {patientName.split(" ")[0]} <span>✦</span></h3><span className="score-pill">Very good</span></div><p>This is a sample wellness score from your demo profile. Your dental professional can add verified findings after an assessment.</p><div className="score-progress"><span style={{ width: "85%" }} /></div><div className="score-progress-meta"><span>Wellness overview</span><strong>85 / 100</strong></div><button className="inline-link" onClick={() => navigate("Tooth health")}>View health report <ArrowRight size={14} /></button></div></div>
-                <div className="health-card-stats"><div><span className="health-stat-icon mint"><ShieldCheck size={15} /></span><span><small>Gum health</small><strong>Good</strong></span></div><div><span className="health-stat-icon lavender"><Sparkles size={15} /></span><span><small>Last check-up</small><strong>Aug 14, 2026</strong></span></div><div><span className="health-stat-icon peach"><Activity size={15} /></span><span><small>Next step</small><strong>Routine visit</strong></span></div></div>
-              </section>
+              <div className="dentora-lower-grid">
+                <section className="dentora-booking-card">
+                  <div className="dentora-panel-heading"><span className="dentora-heading-icon"><CalendarDays size={18} /></span><h2>Book Appointment</h2><button onClick={() => navigate("Appointments")} aria-label="Open appointment page"><ArrowRight size={17} /></button></div>
+                  <div className="dentora-booking-body">
+                    <div className="dentora-mini-calendar">
+                      <div className="dentora-calendar-heading"><button onClick={() => { setMonthOffset(monthOffset - 1); setSelectedDate(1); }} aria-label="Previous month"><ChevronLeft size={16} /></button><strong>{monthTitle}</strong><button onClick={() => { setMonthOffset(monthOffset + 1); setSelectedDate(1); }} aria-label="Next month"><ChevronRight size={16} /></button></div>
+                      <div className="dentora-calendar-grid weekdays">{["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => <span key={d}>{d}</span>)}</div>
+                      <div className="dentora-calendar-grid">{dateCells.map((d, i) => d === 0 ? <span key={"blank-" + i} /> : <button key={d} className={selectedDate === d ? "selected" : ""} onClick={() => setSelectedDate(d)}>{d}</button>)}</div>
+                    </div>
+                    <div className="dentora-booking-options"><span className="dentora-field-label">Available Time</span>
+                      <div className="dentora-time-grid">{slots.slice(0, 6).map((slot) => <button key={slot} className={selectedTime === slot ? "selected" : ""} onClick={() => setSelectedTime(slot)}>{slot}</button>)}</div>
+                      <span className="dentora-field-label doctor-label">Select Doctor</span>
+                      <button className="dentora-selected-doctor" onClick={() => notify("Dr. Sarah Johnson is the sample clinician for this demo.")}><Image src="/images/dr-sarah.svg" alt="" width={48} height={48} /><span><strong>Dr. Sarah Johnson</strong><small>Orthodontist · <b>★ 4.9</b></small></span><ChevronRight size={16} /></button>
+                    </div>
+                  </div>
+                  <button className="dentora-confirm-button" onClick={confirmBooking}><CalendarDays size={17} /> Confirm Appointment <ArrowRight size={17} /></button><p className="dentora-demo-note">Demo booking only · no appointment is sent to a clinic.</p>
+                </section>
 
-              <section className="care-essentials">
-                <div className="section-heading"><div><span className="small-eyebrow">LITTLE HABITS, BIG DIFFERENCE</span><h2>Everyday essentials</h2></div><button className="plain-link" onClick={() => navigate("Tooth health")}>Care tips <ArrowRight size={14} /></button></div>
-                <div className="care-essentials-grid">
-                  <button className="care-essential-card care-brush" onClick={() => navigate("Tooth health")}>
-                    <div><span className="care-label">DAILY ROUTINE</span><strong>Brush gently.<br />Smile confidently.</strong><small>Explore oral care basics <ArrowRight size={12} /></small></div>
-                    <Image src="/images/toothbrush.webp" alt="" width={460} height={360} />
-                  </button>
-                  <button className="care-essential-card care-floss" onClick={() => navigate("Tooth health")}>
-                    <div><span className="care-label">DON’T SKIP THE DETAILS</span><strong>A little floss<br />goes a long way.</strong><small>Explore oral care basics <ArrowRight size={12} /></small></div>
-                    <Image src="/images/dental-floss.webp" alt="" width={460} height={360} />
-                  </button>
-                </div>
-              </section>
+                <section className="dentora-tooth-health-card">
+                  <div className="dentora-panel-heading"><button className="dentora-heading-back" onClick={() => navigate("Tooth health")} aria-label="Open tooth health"><ChevronLeft size={19} /></button><h2>Tooth Health</h2><button onClick={() => navigate("Tooth health")} aria-label="See health details"><ArrowRight size={17} /></button></div>
+                  <div className="dentora-health-tabs">{["Overview", "History", "Analysis"].map((tab) => <button key={tab} className={activeHealthTab === tab ? "selected" : ""} onClick={() => { setActiveHealthTab(tab); if (tab !== "Overview") navigate("Tooth health"); }}>{tab}</button>)}</div>
+                  <div className="dentora-arch-stage"><div className="dentora-arch-aura" /><Image src="/images/dental-arch.webp" alt="Illustration of a full dental arch for an oral wellness overview" width={500} height={350} /><div className="health-callout cavity"><span>🔥</span><small>Cavities<strong>02</strong><i>Need attention</i></small></div><div className="health-callout gum"><span className="health-status-dot" /><small>Gum Health<strong>Good</strong></small></div><div className="health-callout plaque"><span className="health-status-dot" /><small>Plaque<strong>Low</strong></small></div><div className="health-callout overall"><small>Overall Health<strong>85% <em>Healthy</em></strong></small></div></div>
+                  <button className="dentora-health-link" onClick={() => navigate("Tooth health")}>Open health report <ArrowRight size={14} /></button><p className="dentora-demo-note">Illustrative demo data — not a diagnosis.</p>
+                </section>
+              </div>
             </div>
 
-            <aside className="dashboard-side-column">
-              <section className="next-appointment-card">
-                <div className="side-card-title"><span>YOUR NEXT APPOINTMENT</span><button onClick={() => navigate("Appointments")} aria-label="View all appointments"><ArrowUpRight size={16} /></button></div>
-                <div className="appointment-date-row"><span className="date-tile"><small>OCT</small><strong>12</strong></span><span><strong>Monday, October 12</strong><small>10:30 AM · 30 minutes</small></span></div>
-                <div className="appointment-doctor"><div className="doctor-avatar">SJ</div><span><strong>Dr. Sarah Johnson</strong><small>General dentistry</small></span><span className="confirmed-badge"><Check size={12} /> Confirmed</span></div>
-                <div className="next-appointment-actions"><button onClick={() => navigate("Appointments")}>Manage visit</button><button onClick={() => notify("A calendar reminder has been added to this demo.")} aria-label="Add reminder"><CalendarDays size={16} /></button></div>
+            <aside className="dentora-right-rail">
+              <section className="dentora-treatments-panel">
+                <div className="dentora-rail-title"><h2>Treatments</h2><button onClick={() => navigate("Treatments")} aria-label="View all treatments"><ArrowRight size={19} /></button></div>
+                <label className="dentora-treatment-search"><Search size={16} /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search treatments..." /><button onClick={() => setFilterOpen(!filterOpen)} aria-label="Toggle treatment filters"><SlidersHorizontal size={16} /></button></label>
+                <div className="dentora-treatment-chips">{["All", "General", "Cosmetic", "Orthodontics", "Restorative"].map((c) => <button key={c} className={(c === "Orthodontics" ? query.toLowerCase().includes("orthodontics") : category === c) ? "selected" : ""} onClick={() => { setCategory(c === "Orthodontics" ? "All" : c); setQuery(c === "Orthodontics" ? "orthodontics" : ""); }}>{c}</button>)}</div>
+                {filterOpen && <div className="dentora-filter-note">Choose a treatment category or search by name.</div>}
+                <div className="dentora-treatment-grid">{filteredTreatments.slice(0, 4).map((t) => <article className="dentora-treatment-card" key={t.id}><button className="dentora-treatment-image" onClick={() => { setSelectedTreatment(t.name); navigate("Treatments"); }} aria-label={"Explore " + t.name}><TreatmentArt tone={t.tone} /></button><div className="dentora-treatment-body"><h3>{t.name}</h3><p>{t.id === "cleaning" ? "Professional cleaning for a healthier, brighter smile." : t.id === "whitening" ? "Brighten your smile with safe whitening." : t.id === "implants" ? "A permanent solution for missing teeth." : t.id === "orthodontics" ? "Braces and aligners for a confident smile." : t.description}</p><div><strong>{t.price}</strong><button onClick={() => startBooking(t.name)} aria-label={"Book " + t.name}><ArrowRight size={16} /></button></div></div></article>)}</div>
+                {filteredTreatments.length === 0 && <div className="dentora-empty-treatments">No treatments match that search.</div>}
+                <p className="dentora-price-note">Illustrative prices · confirm with your clinic.</p>
               </section>
 
-              <section className="care-team-card">
-                <div className="section-heading compact-heading"><div><span className="small-eyebrow">HERE FOR YOU</span><h2>Your care team</h2></div><button className="more-button" onClick={() => notify("Clinic contact details can be configured in Profile.")} aria-label="Care team details"><ArrowUpRight size={16} /></button></div>
-                <div className="care-doctor-row"><div className="doctor-portrait">SJ</div><div><strong>Dr. Sarah Johnson</strong><small>General dentist</small><span className="doctor-rating">✦ <b>4.9</b> <i>(sample rating)</i></span></div></div>
-                <p className="care-team-note">Your dental care, with a little more care.</p><button className="text-button" onClick={() => notify("Clinic messaging will be connected to the practice contact system.")}>Message the clinic <ArrowRight size={14} /></button>
-              </section>
-
-              <section className="recommended-card">
-                <div className="recommend-top"><span className="small-eyebrow">A GENTLE NUDGE</span><Sparkles size={17} /></div><div className="recommend-art"><Image src="/images/toothbrush.webp" alt="" width={460} height={360} className="recommend-care-image" /></div><h3>Keep your smile<br /><em>feeling fresh.</em></h3><p>A routine check-up is a good way to keep in touch with your oral health.</p><button className="outline-button" onClick={() => startBooking("Dental check-up")}>Find a time <ArrowRight size={14} /></button>
+              <section className="dentora-records-panel">
+                <div className="dentora-records-title"><h2>Recent Records</h2><button onClick={() => navigate("My records")}>See All</button></div>
+                {RECORDS.slice(0, 4).map((record, index) => <button className="dentora-record-row" key={record.title} onClick={() => navigate("My records")}><span className={"dentora-record-icon record-tone-" + (index % 4)}><FileText size={17} /></span><span className="dentora-record-copy"><strong>{record.title}</strong><small>{record.date} <i>·</i> {record.size}</small></span><span className="dentora-record-download"><ArrowDownRecord /></span></button>)}
               </section>
             </aside>
           </div>}
