@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "predev": "node scripts/generate-images.mjs",
+    "prebuild": "node scripts/generate-images.mjs",
+    "generate:images": "node scripts/generate-images.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -17,7 +20,8 @@
     "next": "^15.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "three": "^0.179.1"
+    "three": "^0.179.1",
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.12",
