@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import {
   Activity, ArrowRight, ArrowUpRight, Bell, CalendarDays,
   Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3,
-  ClipboardList, FileText, HeartPulse, Home, Menu, Search, Settings,
+  ClipboardList, FileText, HeartPulse, Home as HomeIcon, Menu, Search, Settings,
   ShieldCheck, Sparkles, Stethoscope, UserRound, WalletCards, X, Plus,
   SlidersHorizontal, LogOut, CheckCircle2, MoreHorizontal,
 } from "lucide-react";
@@ -14,7 +14,7 @@ type Treatment = { id: string; name: string; category: string; price: string; du
 type Booking = { id: number; treatment: string; date: string; time: string; doctor: string; status: string; };
 
 const NAV: { label: View; icon: typeof Home }[] = [
-  { label: "Overview", icon: Home },
+  { label: "Overview", icon: HomeIcon },
   { label: "Appointments", icon: CalendarDays },
   { label: "Treatments", icon: Sparkles },
   { label: "Tooth health", icon: HeartPulse },
@@ -340,7 +340,7 @@ export default function Home() {
       </div>
 
       <nav className="mobile-bottom-nav" aria-label="Quick navigation">
-        {([{ label: "Overview" as View, icon: Home }, { label: "Appointments" as View, icon: CalendarDays }, { label: "Treatments" as View, icon: Sparkles }, { label: "Tooth health" as View, icon: HeartPulse }, { label: "Profile" as View, icon: UserRound }]).map((item) => { const Icon = item.icon; return <button key={item.label} className={activeView === item.label ? "active" : ""} onClick={() => navigate(item.label)}><Icon size={19} /><span>{item.label === "Tooth health" ? "Health" : item.label === "Appointments" ? "Visits" : item.label}</span></button>; })}
+        {([{ label: "Overview" as View, icon: HomeIcon }, { label: "Appointments" as View, icon: CalendarDays }, { label: "Treatments" as View, icon: Sparkles }, { label: "Tooth health" as View, icon: HeartPulse }, { label: "Profile" as View, icon: UserRound }]).map((item) => { const Icon = item.icon; return <button key={item.label} className={activeView === item.label ? "active" : ""} onClick={() => navigate(item.label)}><Icon size={19} /><span>{item.label === "Tooth health" ? "Health" : item.label === "Appointments" ? "Visits" : item.label}</span></button>; })}
       </nav>
 
       {bookingOpen && <div className="modal-scrim" role="presentation" onClick={(e) => { if (e.target === e.currentTarget) setBookingOpen(false); }}><section className="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title"><div className="modal-top"><span className="modal-icon"><CalendarDays size={20} /></span><button className="modal-close" onClick={() => setBookingOpen(false)} aria-label="Close booking dialog"><X size={19} /></button></div><span className="small-eyebrow">LET’S FIND A TIME</span><h2 id="booking-modal-title">Book your visit.</h2><p>Choose a treatment and confirm your preferred time. This is a local demo; no real booking is submitted.</p><label className="modal-label">Treatment<select value={selectedTreatment} onChange={(e) => setSelectedTreatment(e.target.value)}>{TREATMENTS.map((t) => <option key={t.id} value={t.name}>{t.name} · {t.price}</option>)}</select></label><div className="modal-summary"><span><CalendarDays size={16} /><span><small>DATE</small><strong>{monthDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</strong></span></span><span><Clock3 size={16} /><span><small>TIME</small><strong>{selectedTime}</strong></span></span></div><div className="modal-quick-times">{["09:00 AM", "10:30 AM", "02:00 PM"].map((time) => <button key={time} className={selectedTime === time ? "selected" : ""} onClick={() => setSelectedTime(time)}>{time}</button>)}</div><button className="primary-button modal-confirm" onClick={confirmBooking}>Confirm appointment <ArrowRight size={16} /></button><button className="modal-back" onClick={() => { setBookingOpen(false); navigate("Appointments"); }}>Choose another date <ArrowUpRight size={14} /></button></section></div>}
