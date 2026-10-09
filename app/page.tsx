@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   Activity, ArrowRight, ArrowUpRight, Bell, CalendarDays,
   Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3,
@@ -13,7 +14,7 @@ type View = "Overview" | "Appointments" | "Treatments" | "Tooth health" | "My re
 type Treatment = { id: string; name: string; category: string; price: string; duration: string; description: string; detail: string; tone: string; };
 type Booking = { id: number; treatment: string; date: string; time: string; doctor: string; status: string; };
 
-const NAV: { label: View; icon: typeof Home }[] = [
+const NAV: { label: View; icon: LucideIcon }[] = [
   { label: "Overview", icon: HomeIcon },
   { label: "Appointments", icon: CalendarDays },
   { label: "Treatments", icon: Sparkles },
