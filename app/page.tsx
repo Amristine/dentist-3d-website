@@ -44,12 +44,12 @@ const slots = ["09:00 AM", "10:00 AM", "10:30 AM", "11:00 AM", "02:00 PM", "03:0
 
 function ToothArt({ variant = "main" }: { variant?: "main" | "small" | "implant" | "clean" | "arch"; shield?: boolean }) {
   const src = variant === "arch"
-    ? "/images/dental-arch.png"
+    ? "/images/dental-arch.svg"
     : variant === "implant"
-      ? "/images/treatment-implant.png"
+      ? "/images/treatment-implant.svg"
       : variant === "clean"
-        ? "/images/treatment-cleaning.png"
-        : "/images/tooth-hero.png";
+        ? "/images/treatment-cleaning.svg"
+        : "/images/tooth-hero.svg";
   const alt = variant === "arch"
     ? "Illustration of a full dental arch with polished teeth and healthy gums"
     : "Glossy porcelain tooth artwork with soft studio lighting";
@@ -79,15 +79,15 @@ function HealthRing({ score = 85 }: { score?: number }) {
 
 function TreatmentArt({ tone }: { tone: string }) {
   const art: Record<string, string> = {
-    mint: "/images/treatment-cleaning.png",
-    peach: "/images/treatment-whitening.png",
-    lavender: "/images/treatment-implant.png",
-    aqua: "/images/treatment-aligners.png",
-    butter: "/images/tooth-hero.png",
+    mint: "/images/treatment-cleaning.svg",
+    peach: "/images/treatment-whitening.svg",
+    lavender: "/images/treatment-implant.svg",
+    aqua: "/images/treatment-aligners.svg",
+    butter: "/images/tooth-hero.svg",
   };
   return (
     <div className={`treatment-art treatment-art-${tone}`}>
-      <Image src={art[tone] ?? "/images/tooth-hero.png"} alt="" fill sizes="(max-width: 700px) 50vw, 28vw" className="treatment-art-image" />
+      <Image src={art[tone] ?? "/images/tooth-hero.svg"} alt="" fill sizes="(max-width: 700px) 50vw, 28vw" className="treatment-art-image" />
       <span className="art-sparkle sparkle-one">✦</span><span className="art-sparkle sparkle-two">✧</span>
     </div>
   );
@@ -246,11 +246,11 @@ export default function Home() {
                 <div className="care-essentials-grid">
                   <button className="care-essential-card care-brush" onClick={() => navigate("Tooth health")}>
                     <div><span className="care-label">DAILY ROUTINE</span><strong>Brush gently.<br />Smile confidently.</strong><small>Explore oral care basics <ArrowRight size={12} /></small></div>
-                    <Image src="/images/toothbrush-care.png" alt="" width={460} height={360} />
+                    <Image src="/images/toothbrush-care.svg" alt="" width={460} height={360} />
                   </button>
                   <button className="care-essential-card care-floss" onClick={() => navigate("Tooth health")}>
                     <div><span className="care-label">DON’T SKIP THE DETAILS</span><strong>A little floss<br />goes a long way.</strong><small>Explore oral care basics <ArrowRight size={12} /></small></div>
-                    <Image src="/images/floss-care.png" alt="" width={460} height={360} />
+                    <Image src="/images/floss-care.svg" alt="" width={460} height={360} />
                   </button>
                 </div>
               </section>
@@ -271,7 +271,7 @@ export default function Home() {
               </section>
 
               <section className="recommended-card">
-                <div className="recommend-top"><span className="small-eyebrow">A GENTLE NUDGE</span><Sparkles size={17} /></div><div className="recommend-art"><Image src="/images/toothbrush-care.png" alt="" width={460} height={360} className="recommend-care-image" /></div><h3>Keep your smile<br /><em>feeling fresh.</em></h3><p>A routine check-up is a good way to keep in touch with your oral health.</p><button className="outline-button" onClick={() => startBooking("Dental check-up")}>Find a time <ArrowRight size={14} /></button>
+                <div className="recommend-top"><span className="small-eyebrow">A GENTLE NUDGE</span><Sparkles size={17} /></div><div className="recommend-art"><Image src="/images/toothbrush-care.svg" alt="" width={460} height={360} className="recommend-care-image" /></div><h3>Keep your smile<br /><em>feeling fresh.</em></h3><p>A routine check-up is a good way to keep in touch with your oral health.</p><button className="outline-button" onClick={() => startBooking("Dental check-up")}>Find a time <ArrowRight size={14} /></button>
               </section>
             </aside>
           </div>}
