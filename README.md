@@ -4,9 +4,7 @@ A responsive dental patient web app inspired by the provided mint, teal, and pea
 
 ## Dental artwork
 
-The `public/images/` directory contains individually art-directed dental illustration sources: a glossy porcelain tooth, cleaning, whitening, titanium implant, clear aligners, dental arch, toothbrush, and floss artwork.
-
-High-resolution PNGs are rendered automatically from the SVG source art before development and production builds. The app uses those PNGs in its actual dashboard, treatment catalogue, care cards, and tooth-health screen.
+The `public/images/` directory contains individually art-directed, optimized WebP assets: hero tooth, cleaning, whitening, titanium implant, clear aligners, dental arch, toothbrush, and floss. The app loads these committed files directly in its dashboard, treatment catalogue, everyday-care cards, recommendation panel, and tooth-health screen.
 
 ```bash
 npm install
