@@ -1,43 +1,52 @@
-# Lumière — The Art of Your Smile
+# DentaCare — Dental Patient Portal
 
-An art-directed, cinematic dental website concept built with Next.js, React Three Fiber, Three.js, GSAP and custom CSS. The art direction pairs deep forest-green scenes with warm porcelain, champagne accents, editorial typography and a procedural 3D tooth sculpture.
+A responsive dental patient web app inspired by the provided mint, teal, and peach 3D mobile UI reference. Built with Next.js App Router, TypeScript, Lucide icons, and a custom CSS design system.
 
-## Experience
+## Included screens
 
-- Full-viewport hero with pointer-responsive 3D tooth sculpture, animated metallic orbital lines and fine technical labels.
-- Editorial philosophy section with large type and cinematic photography.
-- Interactive 3D layered tooth anatomy illustration with educational labels.
-- Three immersive treatment panels with image reveals and hover transitions.
-- Clinic studio and dentist introduction sections.
-- Appointment CTA, responsive mobile navigation, accessible focus states and reduced-motion support.
+- **Overview dashboard:** welcome banner, next appointment, quick actions, oral wellness sample score, care team, and recommendation panel.
+- **Appointments:** month calendar, selectable appointment date/time, booking dialog, and a local demo confirmation flow.
+- **Treatments:** searchable and filterable treatment catalogue with custom tooth artwork, descriptions, sample prices, and booking entry points.
+- **Tooth health:** custom SVG dental-arch illustration, sample wellness metrics, history timeline, and analysis screen.
+- **My records:** records list, sample document types and privacy guidance.
+- **Profile:** editable local demo details, reminder toggle, preferences, and related navigation.
+
+The artwork is drawn as in-app SVG and CSS illustrations so the core visual elements do not depend on external 3D model downloads or image assets.
 
 ## Run locally
 
 Requires Node.js 20.9 or newer.
 
 ```bash
+git clone https://github.com/Amristine/dentist-3d-website.git
+cd dentist-3d-website
 npm install
 npm run dev
 ```
 
 Open http://localhost:3000.
 
-## Production build
+## Verify a production build
 
 ```bash
 npm run build
-npm start
 ```
 
-The GitHub Actions workflow also runs the production build when changes are pushed to `main` or a pull request is opened.
+GitHub Actions runs the production build on pushes to `main`, pull requests, and manual workflow dispatches.
 
-## Before launching for a real clinic
+## Important: current prototype scope
 
-- Replace the sample Lumière brand and copy with the practice's approved brand information.
-- Update `hello@lumieredental.example` in `app/page.tsx` with a verified appointment email, or wire the CTA to the clinic's booking provider.
-- Replace the generic studio and dentist photography with licensed, clinic-approved images.
-- Replace the dentist name/credentials placeholder in `app/page.tsx` with verified information.
-- Update `metadataBase` in `app/layout.tsx` to the real website URL.
-- Review treatment descriptions and any medical information with the dental professional before publishing.
+This version is a **front-end demo**. Navigation, search/filtering, date and time selection, booking confirmation, tabs, profile editing, and reminder controls work in local page state. They do not currently connect to a clinic, user account, email/SMS, calendar, database, or document storage. Sample patient details, appointment information, health scores, ratings, and prices are illustrative and are not actual medical records or clinical assessments.
 
-No real qualifications, patient outcomes, statistics or testimonials are claimed.
+## Before real patient use
+
+1. Add authentication and patient/clinic roles with server-side authorization.
+2. Store patient profiles and appointment requests in a secure backend/database; validate all input on the server.
+3. Connect appointment slots to the clinic's real availability and handle conflicting bookings.
+4. Add clinic email/SMS notifications and confirmation/cancellation flows.
+5. Use private, access-controlled storage for actual medical records and verify access for every document request.
+6. Have the practice review all treatment copy and prices; replace sample dentist details and stock imagery with approved clinic content.
+7. Add privacy notices, consent, audit logs, retention rules, backups, monitoring, and any compliance requirements applicable to the clinic's location.
+8. Configure production environment variables and deploy only after a security review.
+
+**Do not enter real patient health data into this demo.** The current UI is a prototype, not a production clinical record system.
