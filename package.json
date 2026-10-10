@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "predev": "node scripts/generate-images.mjs",
-    "prebuild": "node scripts/generate-images.mjs",
-    "generate:images": "node scripts/generate-images.mjs"
+    "predev": "node scripts/prepare-original-images.mjs && node scripts/generate-images.mjs",
+    "prebuild": "node scripts/prepare-original-images.mjs && node scripts/generate-images.mjs",
+    "generate:images": "node scripts/prepare-original-images.mjs && node scripts/generate-images.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
